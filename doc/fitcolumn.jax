@@ -1,0 +1,157 @@
+*fitcolumn.jax*	上下いずれかの行の特定の文字と同じ列まで指定した文字を入力する
+
+Version 0.0.0
+Copyright (C) 2013 deris <deris0126@gmail.com>
+License: MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*fitcolumn-contents*
+
+Introduction		|fitcolumn-introduction|
+Interface		|fitcolumn-interface|
+  Functions		  |fitcolumn-functions|
+  Key Mappings		  |fitcolumn-key-mappings|
+Examples		|fitcolumn-examples|
+Bugs			|fitcolumn-bugs|
+Changelog		|fitcolumn-changelog|
+
+
+
+
+==============================================================================
+INTRODUCTION					*fitcolumn-introduction*
+
+*fitcolumn* は上下いずれかの行の特定の文字と同じ列まで指定した文字を
+入力するVimプラグインです。
+
+
+Requirements:
+- Vim 7 or later
+
+Latest version:
+https://github.com/deris/vim-fitcolumn
+
+
+==============================================================================
+INTERFACE					*fitcolumn-interface*
+
+------------------------------------------------------------------------------
+FUNCTIONS					*fitcolumn-functions*
+
+fitcolumn#fitabovecolumn([{options}])	*fitcolumn#fitabovecolumn()*
+	現カーソル位置から、一つ上の行の直近の特定の文字と同じ列
+	まで指定した文字を入力する
+	
+	{options}で指定しなければ、一つ上の行の特定の文字、
+	および入力する文字は、手動でユーザが入力するよう
+	プロンプトで入力を促す
+	
+	{options}は辞書型で指定します。指定できるキーは以下のとおり
+	insertchar
+		入力する文字
+		指定すると手動での入力確認は表示されずに
+		ここで指定された文字が入力される
+	searchchar
+		入力する文字の終端として参照する文字
+		一つ上の行で、ここで指定した直近の文字まで入力する
+		指定すると手動での入力確認は表示されずに
+		ここで指定された文字の列まで入力される
+	rightward
+		入力する文字の終端を調整する(数値)
+		指定した数値分余分に文字を入力する
+		デフォルトは0
+	注:insert modeで使用すること
+
+fitcolumn#fitbelowcolumn([{options}])	*fitcolumn#fitbelowcolumn()*
+	fitcolumn#fitabovecolumnとほぼ同じで、こちらは一つ下の行の
+	を見る
+	注:insert modeで使用すること
+
+
+------------------------------------------------------------------------------
+KEY MAPPINGS					*fitcolumn-key-mappings*
+
+<Plug>(fitcolumn-abovecolumn)			*<Plug>(fitcolumn-abovecolumn)*
+	fitcolumn#fitabovecolumn()の引数なしと同じ動き
+	引数を指定したい場合は関数を使用してください
+
+<Plug>(fitcolumn-belowcolumn)			*<Plug>(fitcolumn-belowcolumn)*
+	fitcolumn#fitbelowcolumn()の引数なしと同じ動き
+	引数を指定したい場合は関数を使用してください
+
+
+以下のキーマッピングは、デフォルトで定義済みです。
+g:fitcolumn_no_default_key_mappings に 1 が設定されていると定義されません。
+
+{lhs}			{rhs}
+--------		-----------------------------
+<C-k>			<Plug>(fitcolumn-abovecolumn)
+<C-j>			<Plug>(fitcolumn-belowcolumn)
+
+==============================================================================
+EXAMPLES					*fitcolumn-examples*
+
+	" デフォルトキーマッピングを変更
+	let g:fitcolumn_no_default_key_mappings = 1
+	imap <C-h>  <Plug>(fitcolumn-abovecolumn)
+	imap <C-l>  <Plug>(fitcolumn-belowcolumn)
+
+	" 引数を指定したい場合は関数を使用してください
+
+	" 入力文字をスペースにする
+	let g:fitcolumn_no_default_key_mappings = 1
+	inoremap <expr> <C-k>  fitcolumn#fitabovecolumn({
+	  \ 'insertchar': ' ',
+	  \ })
+	inoremap <expr> <C-j>  fitcolumn#fitbelowcolumn({
+	  \ 'insertchar': ' ',
+	  \ })
+
+	" 上(下)の行の、'('と同じ位置まで、スペースを入力する
+	let g:fitcolumn_no_default_key_mappings = 1
+	inoremap <expr> <C-k>  fitcolumn#fitabovecolumn({
+	  \ 'insertchar': ' ',
+	  \ 'searchchar': '(',
+	  \ 'rightward': 1,
+	  \ })
+	inemap <expr> <C-j>  fitcolumn#fitbelowcolumn({
+	  \ 'insertchar': ' ',
+	  \ 'insertchar': '(',
+	  \ 'rightward': 1,
+	  \ })
+
+
+==============================================================================
+BUGS						*fitcolumn-bugs*
+
+- タブの入力に対応してません。
+
+
+==============================================================================
+CHANGELOG					*fitcolumn-changelog*
+
+0.0.0	2013-05-21
+	- Initial version.
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fen:fdl=0:fdm=marker:
+
