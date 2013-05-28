@@ -22,10 +22,10 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-if exists('g:loaded_pluginname')
+if exists('g:loaded_fitcolumn')
   finish
 endif
-let g:loaded_pluginname = 1
+let g:loaded_fitcolumn = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
