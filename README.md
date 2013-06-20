@@ -4,7 +4,22 @@ vim-fitcolumn
 This is vim plugin for input repeatedly from current column
 to above or below column specified 'character'.
 
-Usage
+Screenshot
+---
+
+Following screenshot is that use default key mappings `<C-k>`.  
+First you `input above type` to specify above character and
+`input insert type` to specify input character.
+
+![screenshot](http://gifzo.net/JEjPKUwE1t.gif)
+
+
+Following screenshot is that use custom settings(look at last settings at Settings).  
+You `input above type` to specify above character and input `<Space>` that according to settings.
+
+![screenshot](http://gifzo.net/BRjXdMf8ULs.gif)
+
+Settings
 ---
 
 ```vim
