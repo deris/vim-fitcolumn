@@ -11,13 +11,12 @@ Following screenshot is that use default key mappings `<C-k>`.
 First you `input above type` to specify above character and
 `input insert type` to specify input character.
 
-![screenshot](http://gifzo.net/JEjPKUwE1t.gif)
-
+![screenshot](http://gifzo.net/BLyWGlT2DEY.gif)
 
 Following screenshot is that use custom settings(look at last settings at Settings).  
 You `input above type` to specify above character and input `<Space>` that according to settings.
 
-![screenshot](http://gifzo.net/BRjXdMf8ULs.gif)
+![screenshot](http://gifzo.net/62Ut5axERB.gif)
 
 Settings
 ---
